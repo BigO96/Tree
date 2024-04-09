@@ -27,8 +27,9 @@ struct ContentView: View {
             .disabled(inputKey.isEmpty)
 
             ScrollView {
-                NodeView(node: tree.tree.root)
+                NodeView(node: tree.tree.root, depth: 0)
                     .id(tree.version)
+                    .padding(.top, 20)
             }
         }
     }
@@ -36,64 +37,38 @@ struct ContentView: View {
 
 struct NodeView: View {
     var node: TreeNode?
-    var depth: Int = 0
-    
+    var depth: Int
+
+
+    private let baseSpacing: CGFloat = 60
+    private let nodeSize: CGFloat = 25
+
     var body: some View {
         VStack {
             if let node = node, node.key != -1 {
                 Circle()
                     .fill(node.color == "red" ? Color.red : Color.black)
-                    .frame(width: 50, height: 50)
-                    .overlay(
-                        Text("Key: \(node.key)\nDepth: \(depth)")
-                            .font(.caption2)
-                            .foregroundColor(.white)
-                            .multilineTextAlignment(.center)
-                    )
-                
-                let spacing = max(10 - CGFloat(depth) * 2, 2)
-                
-                HStack(spacing: spacing) {
-                    if let leftNode = node.left, leftNode.key != -1 {
-                        NodeView(node: leftNode, depth: depth + 1)
+                    .frame(width: nodeSize, height: nodeSize)
+                    .overlay(Text("\(node.key)").font(.caption).foregroundColor(.white))
+                    .padding(.bottom, 10)
+
+                HStack(spacing: max(baseSpacing / CGFloat(pow(2, Double(depth))), 15)) {
+                    if let leftChild = node.left, leftChild.key != -1 {
+                        NodeView(node: leftChild, depth: depth + 1)
                     }
-                    if let rightNode = node.right, rightNode.key != -1 {
-                        NodeView(node: rightNode, depth: depth + 1)
+
+                    if node.left == nil || node.right == nil {
+                        Spacer()
+                    }
+
+                    if let rightChild = node.right, rightChild.key != -1 {
+                        NodeView(node: rightChild, depth: depth + 1)
                     }
                 }
             }
         }
     }
 }
-
-
-//struct NodeView: View {
-//    var node: TreeNode?
-//    var depth: Int = 0 // Added depth property to track the level of each node
-//    
-//    var body: some View {
-//        VStack {
-//            if let node = node, node.key != -1 {
-//                Circle()
-//                    .fill(node.color == "red" ? Color.red : Color.black)
-//                    .frame(width: 30, height: 30)
-//                    .overlay(Text("\(node.key)")
-//                        .foregroundColor(.white))
-//                
-//                let spacing = max(10 - CGFloat(depth) * 2, 2)
-//                
-//                HStack(spacing: spacing) {
-//                    if let leftNode = node.left, leftNode.key != -1 {
-//                        NodeView(node: leftNode, depth: depth + 1)
-//                    }
-//                    if let rightNode = node.right, rightNode.key != -1 {
-//                        NodeView(node: rightNode, depth: depth + 1)
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
 
 
 struct ContentView_Previews: PreviewProvider {
