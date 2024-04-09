@@ -11,6 +11,7 @@
 		E6E30D8F2BC4C66E00DCE293 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E30D8E2BC4C66E00DCE293 /* ContentView.swift */; };
 		E6E30D912BC4C66F00DCE293 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6E30D902BC4C66F00DCE293 /* Assets.xcassets */; };
 		E6E30D942BC4C66F00DCE293 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6E30D932BC4C66F00DCE293 /* Preview Assets.xcassets */; };
+		E6E30D9B2BC4C67700DCE293 /* TreeLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E30D9A2BC4C67700DCE293 /* TreeLogic.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		E6E30D8E2BC4C66E00DCE293 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E6E30D902BC4C66F00DCE293 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E6E30D932BC4C66F00DCE293 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E6E30D9A2BC4C67700DCE293 /* TreeLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeLogic.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			children = (
 				E6E30D8C2BC4C66E00DCE293 /* TreeApp.swift */,
 				E6E30D8E2BC4C66E00DCE293 /* ContentView.swift */,
+				E6E30D9A2BC4C67700DCE293 /* TreeLogic.swift */,
 				E6E30D902BC4C66F00DCE293 /* Assets.xcassets */,
 				E6E30D922BC4C66F00DCE293 /* Preview Content */,
 			);
@@ -137,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6E30D9B2BC4C67700DCE293 /* TreeLogic.swift in Sources */,
 				E6E30D8F2BC4C66E00DCE293 /* ContentView.swift in Sources */,
 				E6E30D8D2BC4C66E00DCE293 /* TreeApp.swift in Sources */,
 			);
