@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 class ObservableRedBlackTree: ObservableObject {
     @Published var tree: RedBlackTree
     @Published var version: Int = 0
@@ -30,15 +28,18 @@ class TreeNode {
     var color: String
     var left: TreeNode?
     var right: TreeNode?
+    var depth: Int
 
-    init(key: Int) {
+    init(key: Int, depth: Int = 0, position: Int = 0) {
         self.key = key
         self.parent = nil
         self.color = "red"
         self.left = nil
         self.right = nil
+        self.depth = depth
     }
 }
+
 
 class RedBlackTree {
     var NIL: TreeNode
@@ -123,6 +124,7 @@ extension RedBlackTree {
 extension RedBlackTree {
     func insert(key: Int) {
         let z = TreeNode(key: key)
+        z.depth = 0
         
         var y = self.NIL
         var x = self.root
@@ -137,21 +139,25 @@ extension RedBlackTree {
         }
         
         z.parent = y
-        
         if y === self.NIL {
             self.root = z
-        } else if z.key < y.key {
-            y.left = z
+            z.depth = 0
         } else {
-            y.right = z
+            if z.key < y.key {
+                y.left = z
+            } else {
+                y.right = z
+            }
+            z.depth = y.depth + 1
         }
         
         z.left = self.NIL
         z.right = self.NIL
         z.color = "red"
-        
+    
         insertFixup(node: z)
     }
+
     
     private func insertFixup(node: TreeNode) {
         var z = node

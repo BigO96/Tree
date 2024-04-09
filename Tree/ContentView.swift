@@ -34,19 +34,22 @@ struct ContentView: View {
     }
 }
 
-
 struct NodeView: View {
     var node: TreeNode?
-    var depth: Int = 0 // Added depth property to track the level of each node
+    var depth: Int = 0
     
     var body: some View {
         VStack {
             if let node = node, node.key != -1 {
                 Circle()
                     .fill(node.color == "red" ? Color.red : Color.black)
-                    .frame(width: 30, height: 30)
-                    .overlay(Text("\(node.key)")
-                        .foregroundColor(.white))
+                    .frame(width: 50, height: 50)
+                    .overlay(
+                        Text("Key: \(node.key)\nDepth: \(depth)")
+                            .font(.caption2)
+                            .foregroundColor(.white)
+                            .multilineTextAlignment(.center)
+                    )
                 
                 let spacing = max(10 - CGFloat(depth) * 2, 2)
                 
@@ -62,6 +65,35 @@ struct NodeView: View {
         }
     }
 }
+
+
+//struct NodeView: View {
+//    var node: TreeNode?
+//    var depth: Int = 0 // Added depth property to track the level of each node
+//    
+//    var body: some View {
+//        VStack {
+//            if let node = node, node.key != -1 {
+//                Circle()
+//                    .fill(node.color == "red" ? Color.red : Color.black)
+//                    .frame(width: 30, height: 30)
+//                    .overlay(Text("\(node.key)")
+//                        .foregroundColor(.white))
+//                
+//                let spacing = max(10 - CGFloat(depth) * 2, 2)
+//                
+//                HStack(spacing: spacing) {
+//                    if let leftNode = node.left, leftNode.key != -1 {
+//                        NodeView(node: leftNode, depth: depth + 1)
+//                    }
+//                    if let rightNode = node.right, rightNode.key != -1 {
+//                        NodeView(node: rightNode, depth: depth + 1)
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
 
 
 struct ContentView_Previews: PreviewProvider {
