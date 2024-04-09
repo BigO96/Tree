@@ -203,38 +203,3 @@ extension RedBlackTree {
         self.root.color = "black"
     }
 }
-
-extension ObservableRedBlackTree {
-    func flattenedTree() -> [(node: TreeNode?, depth: Int, position: Int)] {
-        var result: [(node: TreeNode?, depth: Int, position: Int)] = []
-        var queue: [(node: TreeNode?, depth: Int, position: Int)] = [(self.tree.root, 0, 0)]
-        
-        var currentPositionInLevel = 0
-        var currentDepth = 0
-
-        while !queue.isEmpty {
-            let (node, depth, position) = queue.removeFirst()
-            
-            // Check if we moved to a new level
-            if depth > currentDepth {
-                currentDepth = depth
-                currentPositionInLevel = 0
-            }
-            
-            // Process the current node
-            result.append((node, depth, currentPositionInLevel))
-            currentPositionInLevel += 1
-            
-            // Ensure we only enqueue children of non-nil nodes
-            if let unwrappedNode = node, unwrappedNode !== self.tree.NIL {
-                // Enqueue children, accounting for `nil` as placeholders
-                let leftChild = unwrappedNode.left !== self.tree.NIL ? unwrappedNode.left : nil
-                let rightChild = unwrappedNode.right !== self.tree.NIL ? unwrappedNode.right : nil
-                queue.append((leftChild, depth + 1, position * 2))
-                queue.append((rightChild, depth + 1, position * 2 + 1))
-            }
-        }
-        return result
-    }
-}
-

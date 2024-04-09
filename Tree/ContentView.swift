@@ -39,8 +39,9 @@ struct NodeView: View {
     var node: TreeNode?
     var depth: Int
 
+    @State private var showingNodeDetails = false
 
-    private let baseSpacing: CGFloat = 60
+    private let baseSpacing: CGFloat = 50
     private let nodeSize: CGFloat = 25
 
     var body: some View {
@@ -50,7 +51,14 @@ struct NodeView: View {
                     .fill(node.color == "red" ? Color.red : Color.black)
                     .frame(width: nodeSize, height: nodeSize)
                     .overlay(Text("\(node.key)").font(.caption).foregroundColor(.white))
+                    .offset(y: node.key == 15 ? -20 : 0)
                     .padding(.bottom, 10)
+                    .onTapGesture {
+                        self.showingNodeDetails = true
+                    }
+                    .alert(isPresented: $showingNodeDetails) {
+                        Alert(title: Text("Node Details"), message: Text("Depth: \(depth)"), dismissButton: .default(Text("OK")))
+                    }
 
                 HStack(spacing: max(baseSpacing / CGFloat(pow(2, Double(depth))), 15)) {
                     if let leftChild = node.left, leftChild.key != -1 {
@@ -69,6 +77,7 @@ struct NodeView: View {
         }
     }
 }
+
 
 
 struct ContentView_Previews: PreviewProvider {
